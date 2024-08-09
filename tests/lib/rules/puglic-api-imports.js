@@ -37,7 +37,8 @@ ruleTester.run("puglic-api-imports", rule, {
 				{
 					message: "The import must be from the public api"
 				}
-			]
+			],
+			output: "import Test from \"features/test\""
 		}
 	]
 });
