@@ -39,17 +39,18 @@ ruleTester.run("relative-path", rule, {
 	],
 	invalid: [
 		{
-			code: "import Test from \"features/test/model/types\"",
-			filename: "C:\\Users\\User\\Desktop\\projects\\production-project\\src\\features\\test\\ui",
+			code: "import Test from \"features/test/model/types/test\"",
+			filename: "C:\\Users\\User\\Desktop\\projects\\production-project\\src\\features\\test\\ui\\Test.tsx",
 			errors: [
 				{
 					message: "This import should be relative"
 				}
-			]
+			],
+			output: "import Test from \"../model/types/test\""
 		},
 		{
-			code: "import Test from \"@/features/test/model/types\"",
-			filename: "C:\\Users\\User\\Desktop\\projects\\production-project\\src\\features\\test\\ui",
+			code: "import Test from \"@/features/test/model/types/test\"",
+			filename: "C:\\Users\\User\\Desktop\\projects\\production-project\\src\\features\\test\\ui\\Test.tsx",
 			errors: [
 				{
 					message: "This import should be relative"
@@ -59,7 +60,23 @@ ruleTester.run("relative-path", rule, {
 				{
 					alias: "@"
 				}
-			]
+			],
+			output: "import Test from \"../model/types/test\""
+		},
+		{
+			code: "import Test from \"@/features/test/ui/Test2\"",
+			filename: "C:\\Users\\User\\Desktop\\projects\\production-project\\src\\features\\test\\ui\\Test.tsx",
+			errors: [
+				{
+					message: "This import should be relative"
+				}
+			],
+			options: [
+				{
+					alias: "@"
+				}
+			],
+			output: "import Test from \"./Test2\""
 		},
 	]
 });
